@@ -3,5 +3,34 @@
 <!--Need to define what's going to be pulled from this file and put into the "base" file-->
 
 {% block content %}
-<h1>Hello, World</h1>
+
+<br/>
+<!--{{ api}} This is how a context variable is called in django-->
+{% if city %}
+    {{ zipcode }}
+{% endif %}
+<!--Sleected data from the weather API pulled from dictionaries-->
+<!--Error handling-->
+{% if api %}
+    {% if api == "Error..."%}
+        Error, please try again
+    {% else %}
+    <div class="card">
+        <h5 class="card-header">Canada Weather App</h5>
+
+        <div class="card-body">
+          <h5 class="card-title">City: {{ api.location.name}}
+        </h5>
+          <p class="card-text">Current temp(in celsius): {{ api.current.temp_c}}
+        </p>
+        <p class="card-text">Feels like (in celsius): {{ api.current.feelslike_c}}
+        </p>
+        <p class="card-text">Condition: {{ api.current.condition.text}}
+        </p>
+        </div>
+      </div>
+    {% endif %}
+{% endif %}
+
 {% endblock %}
+
